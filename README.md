@@ -1,2 +1,15 @@
-# 1d_stairs_sketcher
-Stairs Sketcher
+# Stairs Sketcher
+
+Blender add-on.
+
+Add-on functionality
+-
+Creates stairs line from selected loop.
+
+Blender version
+-
+2.79
+
+Version history
+-
+1.0.0

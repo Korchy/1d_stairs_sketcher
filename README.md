@@ -6,6 +6,8 @@ Add-on functionality
 -
 Creates stairs line from selected loop.
 
+Single stair height outputs to INFO area.
+
 Blender version
 -
 2.79

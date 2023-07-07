@@ -28,7 +28,7 @@ class StairsSketcher:
     pass
 
     @classmethod
-    def create_stairs_line(cls, context):
+    def create_stairs_line(cls, context, op):
         # Create stairs line from selected loop
         src_obj = context.active_object
         # switch to Object mode
@@ -57,6 +57,11 @@ class StairsSketcher:
             )
             stairs_height = top_vert.co.z - first_vert.co.z
             stair_height = stairs_height / len(src_vertices)
+            # output stair_height to INFO
+            op.report(
+                type={'INFO'},
+                message='stair height: ' + str(round(stair_height, 4))
+            )
             # create stairs by sorted vertices
             prev_stair_vert = None
             for _i, vertex in enumerate(selection_loop_sorted):
@@ -112,7 +117,8 @@ class StairsSketcher_OT_create_line(Operator):
 
     def execute(self, context):
         StairsSketcher.create_stairs_line(
-            context=context
+            context=context,
+            op=self
         )
         return {'FINISHED'}
 

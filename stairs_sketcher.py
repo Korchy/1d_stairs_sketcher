@@ -13,7 +13,7 @@ bl_info = {
     "name": "Stairs Sketcher",
     "description": "Creates stairs line from selected loop",
     "author": "Nikita Akimov, Paul Kotelevets",
-    "version": (1, 0, 0),
+    "version": (1, 0, 1),
     "blender": (2, 79, 0),
     "location": "View3D > Tool panel > 1D > Stairs Sketcher",
     "doc_url": "https://github.com/Korchy/1d_stairs_sketcher",
@@ -25,7 +25,6 @@ bl_info = {
 # MAIN CLASS
 
 class StairsSketcher:
-    pass
 
     @classmethod
     def create_stairs_line(cls, context, op):
@@ -107,6 +106,14 @@ class StairsSketcher:
         # return sorted sequence
         return vertices_sorted
 
+    @staticmethod
+    def ui(layout):
+        # ui panel
+        layout.operator(
+            operator='stairs_sketcher.create_line',
+            icon='IPO_CONSTANT'
+        )
+
 
 # OPERATORS
 
@@ -132,22 +139,22 @@ class StairsSketcher_PT_panel(Panel):
     bl_category = '1D'
 
     def draw(self, context):
-        layout = self.layout
-        layout.operator(
-            operator='stairs_sketcher.create_line',
-            icon='IPO_CONSTANT'
+        StairsSketcher.ui(
+            layout=self.layout
         )
 
 
 # REGISTER
 
-def register():
+def register(ui=True):
     register_class(StairsSketcher_OT_create_line)
-    register_class(StairsSketcher_PT_panel)
+    if ui:
+        register_class(StairsSketcher_PT_panel)
 
 
-def unregister():
-    unregister_class(StairsSketcher_PT_panel)
+def unregister(ui=True):
+    if ui:
+        unregister_class(StairsSketcher_PT_panel)
     unregister_class(StairsSketcher_OT_create_line)
 
 
